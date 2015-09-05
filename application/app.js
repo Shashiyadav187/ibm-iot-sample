@@ -9,6 +9,7 @@
 var app = require('http').createServer(handler)
 var io = require('socket.io')(app);
 var fs = require('fs');
+var Client = require("ibmiotf").IotfApplication;
 
 
 // cfenv provides access to your Cloud Foundry environment
@@ -17,6 +18,20 @@ var cfenv = require('cfenv');
 
 // get the app environment from Cloud Foundry
 var appEnv = cfenv.getAppEnv();
+
+
+var config = Client.parseConfigFile("./app.config");
+var appClient = new Client(config);
+
+appClient.connect();
+
+appClient.on("connect", function () {
+
+    appClient.subscribeToDeviceEvents();
+
+});
+
+
 
 // start server on the specified port and binding host
 app.listen(appEnv.port, function() {
@@ -38,9 +53,17 @@ function handler (req, res) {
 }
 
 io.on('connection', function (socket) {
-  console.log('a user connected');
-  socket.emit('news', { hello: 'world' });
-  socket.on('my other event', function (data) {
-    console.log(data);
-  });
+  	var counter = 0;
+  	console.log('a user connected');
+  
+  	appClient.on("deviceEvent", function (deviceType, deviceId, eventType, format, payload) {
+		console.log("Device Event from :: "+deviceType+" : "+deviceId+" of event "+eventType+" with payload : "+payload);
+		socket.emit('news', "Device Event from :: "+deviceType+" : "+deviceId+" of event "+eventType+" with payload : "+payload+" Counter : "+counter);
+		counter++;
+	});
+  
+  //socket.on('my other event', function (data) {
+  //  console.log(data);
 });
+
+
