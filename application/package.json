@@ -1,16 +1,24 @@
 {
-	"name": "NodejsStarterApp",
-	"version": "0.0.1",
-	"description": "A sample nodejs app for Bluemix",
-	"scripts": {
-		"start": "node app.js"
-	},
-	"dependencies": {
-		"express": "4.12.x",
-		"cfenv": "1.0.x"
-	},
-	"repository": {},
-	"engines": {
-		"node": "0.12.x"
-	} 
+  "name": "iot-interact-application",
+  "version": "0.0.1",
+  "description": "A sample nodejs app for Bluemix",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "socket.io": "1.x.x",
+    "ibmiotf": "^0.1.1",
+    "cfenv": "1.0.x"
+  },
+  "repository": {},
+  "engines": {
+    "node": "0.12.x"
+  },
+  "main": "app.js",
+  "devDependencies": {},
+  "keywords": [
+    "IoT"
+  ],
+  "author": "Frank Buettner",
+  "license": "ISC"
 }

@@ -32,7 +32,6 @@ appClient.on("connect", function () {
 });
 
 
-
 // start server on the specified port and binding host
 app.listen(appEnv.port, function() {
 	// print a message when the server starts listening
