@@ -4,21 +4,29 @@
 // node.js starter application for Bluemix
 //------------------------------------------------------------------------------
 
-// This application uses its web server
-var app = require('http').createServer(handler)
+// This application uses express as its web server
+var express = require('express');
 
-// we use socket.io for real-time server-client updates
-var io = require('socket.io')(app);
-var fs = require('fs');
+// create a new express server
+var app = express();
+
+// create a http server
+var server = require('http').createServer(app);
+
+// attach socket.io to http server
+var io = require('socket.io').listen(server);
+
+// use IoT Foundation
 var Client = require("ibmiotf").IotfApplication;
 
-
-// cfenv provides access to your Cloud Foundry environment
-// for more info, see: https://www.npmjs.com/package/cfenv
+// cfenv provides access to our Cloud Foundry environment
 var cfenv = require('cfenv');
 
 // get the app environment from Cloud Foundry
 var appEnv = cfenv.getAppEnv();
+
+// serve the files out of ./public as our main files
+app.use(express.static(__dirname + '/public'));
 
 // get credentials (ID, Org, API key & token) from config file
 var config = Client.parseConfigFile("./app.config");
@@ -35,24 +43,11 @@ appClient.on("connect", function () {
 });
 
 // start server on the specified port and binding host
-app.listen(appEnv.port, function() {
-	// print a message when the server starts listening
-  	console.log("server starting on " + appEnv.url);
-  	console.log(__dirname);
+server.listen(appEnv.port, function() {
+  // print a message when the server starts listening
+  console.log("server starting on " + appEnv.url);
+  console.log(__dirname);
 });
-
-// handle http request and response
-function handler (req, res) {
-  fs.readFile(__dirname + '/public/index.html',
-  function (err, data) {
-    if (err) {
-      res.writeHead(500);
-      return res.end('Error loading index.html');
-    }
-    res.writeHead(200);
-    res.end(data);
-  });
-}
 
 // listen to web client connect request
 io.on('connection', function (socket) {
