@@ -60,7 +60,7 @@ io.on('connection', function (socket) {
 		
       // send event received from IoT devices to web client
       // socket.emit('news', "Device Event from :: "+deviceType+" : "+deviceId+" of event "+eventType+" with payload : "+payload+" Counter : "+counter);
-      socket.emit('news', payload);
+      socket.emit('news', String(payload));
 		  counter++;
     });
   

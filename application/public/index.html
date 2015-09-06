@@ -22,7 +22,7 @@
   		
   		socket.on('news', function(msg){
 		var obj = JSON.parse(msg);
-    		$('#messages').html($('<p>').text(obj.d.count));
+		$('#messages').html($('<p>').text(obj.d.count));
   		});
 	</script>
   </body>
