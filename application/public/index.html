@@ -21,7 +21,8 @@
   		var socket = io();
   		
   		socket.on('news', function(msg){
-    		$('#messages').html($('<p>').text(msg));
+		var obj = JSON.parse(msg);
+    		$('#messages').html($('<p>').text(obj.d.count));
   		});
 	</script>
   </body>
