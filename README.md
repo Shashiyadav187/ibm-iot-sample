@@ -1,8 +1,8 @@
-IBM IoT Sample 
+# IBM IoT Sample 
 
 Two parts: device simulator and application backend
 
-DEVICE
+## DEVICE
 
 ```sh
 $ cd device
@@ -10,9 +10,16 @@ $ npm install
 $ npm start
 ```
 
-APPLICATION
+## APPLICATION
 
->cd application
->cf push  // requires IBM IoT service instance
+```sh
+$ cd application
+$ npm install
+$ node .
+```
+ 
+## IBM IoT (a Bluemix service)
 
+*configure your sample device in IBM IoT
+*get your organisation, api-key and token 
 
