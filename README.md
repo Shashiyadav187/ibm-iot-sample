@@ -20,6 +20,6 @@ $ node .
  
 ## IBM IoT (a Bluemix service)
 
-*configure your sample device in IBM IoT
-*get your organisation, api-key and token 
+* configure your sample device in IBM IoT
+* get your organisation, api-key and token 
 
