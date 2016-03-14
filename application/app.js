@@ -28,8 +28,13 @@ var appEnv = cfenv.getAppEnv();
 // serve the files out of ./public as our main files
 app.use(express.static(__dirname + '/public'));
 
-// get credentials (ID, Org, API key & token) from config file
-var config = Client.parseConfigFile("./app.config");
+// get credentials (ID, Org, API key & token) 
+var config = {
+  "org": 'your-org',
+  "id": 'your-app',
+  "auth-key": 'your-auth-key',
+  "auth-token": 'your-token'
+};
 var appClient = new Client(config);
 
 // connect to IoT Foundation

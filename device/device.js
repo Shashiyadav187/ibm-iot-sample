@@ -1,7 +1,13 @@
 var Client = require("ibmiotf").IotfDevice;
 var stdin = process.openStdin();
 
-var config = Client.parseConfigFile("./config.json");
+// get credentials (ID, Org, API key & token)
+var config = {
+  "org": 'yourorg',
+  "id": 'your-device-id',
+  "auth-key": 'auth-key',
+  "auth-token": 'auth-token'
+};
 var deviceClient = new Client(config);
 
 deviceClient.connect();
