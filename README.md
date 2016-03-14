@@ -4,10 +4,11 @@ Two parts: device simulator and application backend
 
 DEVICE
 
->cd device
->npm install
->npm start
-
+```sh
+$ cd device
+$ npm install
+$ npm start
+```
 
 APPLICATION
 
